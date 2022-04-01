@@ -10,6 +10,13 @@ class AddAnnounceController extends GetxController {
   bool valuefirst = false;
   bool valuesecond = false;
 
+
+
+  String selectedValue = "Mahdia" ;
+  RxString selectedValueType = "".obs;
+  RxString selectedValueRegion = "".obs;
+
+
   final RxList<Widget> listImages = <Widget>[].obs;
 
 
@@ -35,6 +42,17 @@ class AddAnnounceController extends GetxController {
     return menuItems;
   }
 
+  List<DropdownMenuItem<String>> get dropdownItemsRegion{
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(child: Text("Region 1"),value: "Region 1"),
+      const DropdownMenuItem(child: Text("Region 2"),value: "Region 2"),
+      const DropdownMenuItem(child: Text("Region 3"),value: "Region 3"),
+      const DropdownMenuItem(child: Text("Region 4"),value: "Region 4"),
+    ];
+    return menuItems;
+  }
+
+
 
   @override
   void onInit() {
@@ -42,11 +60,12 @@ class AddAnnounceController extends GetxController {
     super.onInit();
     types.add(Item("LOUER", false));
     types.add(Item("VENDRE", false));
+    selectedValueType.value= "Villa";
+    selectedValueRegion.value = "Region 1";
     listImages.add(const AddCardBtn());
     name = TextEditingController();
     description = TextEditingController();
     emailForget = TextEditingController();
-
     passwordChange = TextEditingController();
     passwordConfirm = TextEditingController();
 
@@ -63,11 +82,12 @@ class AddAnnounceController extends GetxController {
     name.dispose();
     description.dispose();
     emailForget.dispose();
-
     passwordChange.dispose();
     passwordConfirm.dispose();
   }
-
+  void setType(value) {
+    selectedValueType.value = value;
+  }
  void  onChooseType(index){
    types
          .forEach((gender) => gender.isSelected = false);

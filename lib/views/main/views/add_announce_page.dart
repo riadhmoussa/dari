@@ -1,3 +1,4 @@
+import 'package:dari/config/app_colors.dart';
 import 'package:dari/views/main/controllers/add_announce_controller.dart';
 import 'package:dari/widgets/cart_counter.dart';
 import 'package:dari/widgets/custom_radio.dart';
@@ -14,28 +15,32 @@ class AddAnouncePage extends StatelessWidget {
   final AddAnnounceController _controller = Get.put(AddAnnounceController());
 
   AddAnouncePage({Key? key}) : super(key: key);
-  String selectedValue = "Mahdia";
-  String selectedValueType = "Villa";
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
+        title: Text("Ajouter une nouvelle annonce",style: TextStyle(
+            color: AppColors.whiteColor,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),),
+        centerTitle: true,
+      ),
+
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 50),
+        padding: EdgeInsets.only(left: 20, right: 20, ),
         child: SingleChildScrollView(
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Ajouter une nouvelle annonce',
-                  style: TextStyle(
-                    color: Color(0xff374151),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -70,9 +75,30 @@ class AddAnouncePage extends StatelessWidget {
                       ),
                     ),
                     dropdownColor: Colors.white,
-                    value: selectedValueType,
-                    onChanged: (String? newValue) {},
+                    value: _controller.selectedValueType.value,
+                    onChanged: (String? newValue) {
+                        _controller.setType(newValue);
+                    },
                     items: _controller.dropdownItemsType),
+               Obx(()=> _controller.selectedValueType=="Appartement"?
+                   Column(
+                     children: [
+                       InputField(
+                         field: "Etagé",
+                         placeholder: "Entrez le numéro de l'étage",
+                         controller: _controller.description,
+                       ),
+                       CheckboxListTile(
+                         controlAffinity: ListTileControlAffinity.trailing,
+                         title: const Text('Ascenseur'),
+                         value: _controller.valuesecond,
+                         onChanged: (value) {
+                           _controller.valuesecond = value!;
+                         },
+                       )
+                     ],
+                   )
+              :const SizedBox()),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
@@ -94,9 +120,33 @@ class AddAnouncePage extends StatelessWidget {
                       ),
                     ),
                     dropdownColor: Colors.white,
-                    value: selectedValue,
+                    value: _controller.selectedValue,
                     onChanged: (String? newValue) {},
                     items: _controller.dropdownItemsVille),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    "Région",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xff374151),
+                    ),
+                  ),
+                ),
+                DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(8),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      hintStyle: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                    dropdownColor: Colors.white,
+                    value: _controller.selectedValueRegion.value,
+                    onChanged: (String? newValue) {},
+                    items: _controller.dropdownItemsRegion),
                 InputField(
                   field: "Adresse compléte",
                   placeholder: "Entrez votre adresse compléte",
@@ -142,14 +192,7 @@ class AddAnouncePage extends StatelessWidget {
                         _controller.valuefirst = value!;
                       },
                     ),
-                    CheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      title: const Text('Ascenseur'),
-                      value: _controller.valuesecond,
-                      onChanged: (value) {
-                        _controller.valuesecond = value!;
-                      },
-                    ),
+
                   ],
                 ),
                 GetX<AddAnnounceController>(
