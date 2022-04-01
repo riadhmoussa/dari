@@ -1,7 +1,11 @@
 import 'package:dari/config/app_colors.dart';
+import 'package:dari/utils/utils.dart';
 import 'package:dari/views/main/controllers/account_controller.dart';
 import 'package:dari/widgets/setting_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'change_password_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final _controller = AccountController();
@@ -98,27 +102,32 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 23, vertical:0),
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 23),
-                  decoration: BoxDecoration(
-                      color: AppColors.whiteColor,
-                      borderRadius:
-                          new BorderRadius.all(Radius.circular(10.0))),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 23, vertical: 12),
-                    child: Container(
-                      child: Column(
-                        children: const [
-                          SizedBox(height: 5),
-                          SettingItem(
-                            leftImage: 'assets/change_password_icon.png',
-                            name: 'Changer mot de passe',
-                            rightImage: '',
-                          ),
-                          SizedBox(height: 5),
-                        ],
+              InkWell(
+                onTap: ()=>{
+                  Get.to(ChangePasswordPage())
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 23, vertical:0),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 23),
+                    decoration: BoxDecoration(
+                        color: AppColors.whiteColor,
+                        borderRadius:
+                            new BorderRadius.all(Radius.circular(10.0))),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 23, vertical: 12),
+                      child: Container(
+                        child: Column(
+                          children: const [
+                            SizedBox(height: 5),
+                            SettingItem(
+                              leftImage: 'assets/change_password_icon.png',
+                              name: 'Changer mot de passe',
+                              rightImage: '',
+                            ),
+                            SizedBox(height: 5),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -150,27 +159,36 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 23),
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 23),
-                  decoration: BoxDecoration(
-                      color: AppColors.whiteColor,
-                      borderRadius:
-                          new BorderRadius.all(Radius.circular(10.0))),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 23, vertical: 12),
-                    child: Container(
-                      child: Column(
-                        children: const [
-                          SizedBox(height: 5),
-                          SettingItem(
-                            leftImage: 'assets/logout_icon.png',
-                            name: 'Se déconnecter',
-                            rightImage: '',
-                          ),
-                          SizedBox(height: 5),
-                        ],
+              InkWell(
+                onTap: ()=>{
+                  Utils.confirmDialog((){
+
+                  },(){
+
+                  })
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 23),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 23),
+                    decoration: BoxDecoration(
+                        color: AppColors.whiteColor,
+                        borderRadius:
+                            new BorderRadius.all(Radius.circular(10.0))),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 23, vertical: 12),
+                      child: Container(
+                        child: Column(
+                          children: const [
+                            SizedBox(height: 5),
+                            SettingItem(
+                              leftImage: 'assets/logout_icon.png',
+                              name: 'Se déconnecter',
+                              rightImage: '',
+                            ),
+                            SizedBox(height: 5),
+                          ],
+                        ),
                       ),
                     ),
                   ),

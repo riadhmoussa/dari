@@ -16,26 +16,30 @@ class AddAnouncePage extends StatelessWidget {
 
   AddAnouncePage({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
-        title: Text("Ajouter une nouvelle annonce",style: TextStyle(
+        title: const Text(
+          "Ajouter une nouvelle annonce",
+          style: TextStyle(
             color: AppColors.whiteColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-      ),),
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
         centerTitle: true,
       ),
-
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.only(left: 20, right: 20, ),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+        ),
         child: SingleChildScrollView(
           child: Container(
             child: Column(
@@ -77,28 +81,28 @@ class AddAnouncePage extends StatelessWidget {
                     dropdownColor: Colors.white,
                     value: _controller.selectedValueType.value,
                     onChanged: (String? newValue) {
-                        _controller.setType(newValue);
+                      _controller.setType(newValue);
                     },
                     items: _controller.dropdownItemsType),
-               Obx(()=> _controller.selectedValueType=="Appartement"?
-                   Column(
-                     children: [
-                       InputField(
-                         field: "Etagé",
-                         placeholder: "Entrez le numéro de l'étage",
-                         controller: _controller.description,
-                       ),
-                       CheckboxListTile(
-                         controlAffinity: ListTileControlAffinity.trailing,
-                         title: const Text('Ascenseur'),
-                         value: _controller.valuesecond,
-                         onChanged: (value) {
-                           _controller.valuesecond = value!;
-                         },
-                       )
-                     ],
-                   )
-              :const SizedBox()),
+                Obx(() => _controller.selectedValueType == "Appartement"
+                    ? Column(
+                        children: [
+                          InputField(
+                            field: "Etagé",
+                            placeholder: "Entrez le numéro de l'étage",
+                            controller: _controller.description,
+                          ),
+                          CheckboxListTile(
+                            controlAffinity: ListTileControlAffinity.trailing,
+                            title: const Text('Ascenseur'),
+                            value: _controller.valuesecond,
+                            onChanged: (value) {
+                              _controller.valuesecond = value!;
+                            },
+                          )
+                        ],
+                      )
+                    : const SizedBox()),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
@@ -192,7 +196,6 @@ class AddAnouncePage extends StatelessWidget {
                         _controller.valuefirst = value!;
                       },
                     ),
-
                   ],
                 ),
                 GetX<AddAnnounceController>(
@@ -205,35 +208,34 @@ class AddAnouncePage extends StatelessWidget {
                       itemBuilder: (context, int index) {
                         return InkWell(
                             onTap: () => {
-                              if(index==0){
-                                BottomSheetPickPictureDialog(
-                                    context,
-                                        () async =>  {
-                                          controller.addImage(),
-                                        Navigator.pop(context),
-
-                                }, () async =>  {
-                                  controller.addImage(),
-                                  Navigator.pop(context),
-
-                                })
-
-
-                              }else{
-                                controller.removeImage(index),
-
-                              }
-                            },
+                                  if (index == 0)
+                                    {
+                                      BottomSheetPickPictureDialog(
+                                          context,
+                                          () async => {
+                                                controller.addImage(),
+                                                Navigator.pop(context),
+                                              },
+                                          () async => {
+                                                controller.addImage(),
+                                                Navigator.pop(context),
+                                              })
+                                    }
+                                  else
+                                    {
+                                      controller.removeImage(index),
+                                    }
+                                },
                             child: controller.listImages[index]);
                       },
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         childAspectRatio: (1),
                       ),
                     );
                   },
                 ),
-
                 const SizedBox(
                   height: 30,
                 ),

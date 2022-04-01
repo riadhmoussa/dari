@@ -1,5 +1,5 @@
 import 'package:dari/views/auth/controllers/auth_controller.dart';
-import 'package:dari/views/auth/views/changepassword_page.dart';
+import 'package:dari/views/auth/views/resetpassword_page.dart';
 import 'package:dari/widgets/submit_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class VerificationCodePage extends StatelessWidget {
                 ),
 
                 SubmitButton(title:"Confirmer",onPressed: ()=>{
-                    Get.to(ChangePasswordPage())
+                    Get.to(ResetPasswordPage())
                 },)
               ],
             ),

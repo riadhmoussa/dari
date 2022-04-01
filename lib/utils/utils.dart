@@ -1,9 +1,9 @@
-
-
 import 'dart:ui';
 
+import 'package:dari/config/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 
 class HexColor extends Color {
@@ -49,5 +49,22 @@ class Utils {
       return false;
     }
     return true;
+  }
+
+  static void confirmDialog(Function() onConfirm,Function() onCancel){
+    Get.defaultDialog(
+      title: "Êtes-vous sûr de vouloir vous déconnecter",
+      titleStyle: const TextStyle(fontSize: 18.0),
+      backgroundColor: AppColors.whiteColor,
+      middleText: "",
+      radius: 15.0,
+      textConfirm: "Oui",
+      textCancel: "Non",
+      cancelTextColor: AppColors.redColor,
+      confirmTextColor: AppColors.whiteColor,
+      onConfirm:onConfirm,
+      onCancel: onCancel,
+
+    );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:dari/utils/utils.dart';
-import 'package:dari/views/auth/views/changepassword_page.dart';
+import 'package:dari/views/auth/views/resetpassword_page.dart';
 import 'package:dari/views/auth/views/verification_code_page.dart';
 import 'package:dari/views/main/landing_page.dart';
 import 'package:flutter/cupertino.dart';

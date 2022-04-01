@@ -4,11 +4,12 @@ import 'package:dari/views/main/controllers/home_controller.dart';
 import 'package:dari/views/models/Item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'filter_page.dart';
 
 class HomePage extends StatefulWidget {
-  final _controller = HomePageController();
+  final HomePageController _controller = Get.put(HomePageController());
 
   HomePage({Key? key}) : super(key: key);
 
@@ -19,12 +20,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Item> types = [];
   String selectedValue = "Mahdia";
-  List<DropdownMenuItem<String>> get dropdownItems{
+
+  List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("Mahdia"),value: "Mahdia"),
-      DropdownMenuItem(child: Text("Sfax"),value: "Sfax"),
-      DropdownMenuItem(child: Text("Monastir"),value: "Monastir"),
-      DropdownMenuItem(child: Text("Sousse"),value: "Sousse"),
+      DropdownMenuItem(child: Text("Mahdia"), value: "Mahdia"),
+      DropdownMenuItem(child: Text("Sfax"), value: "Sfax"),
+      DropdownMenuItem(child: Text("Monastir"), value: "Monastir"),
+      DropdownMenuItem(child: Text("Sousse"), value: "Sousse"),
     ];
     return menuItems;
   }
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                               hintText: "Rechercher Annoncer",
                               hintStyle: AppStyles.neutralBlack14W5Style,
                               contentPadding:
-                                  const EdgeInsets.fromLTRB(16, 13, 0, 13),
+                              const EdgeInsets.fromLTRB(16, 13, 0, 13),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: const BorderSide(
@@ -94,13 +96,15 @@ class _HomePageState extends State<HomePage> {
                             FilterSearch(
                                 context,
                                 types,
-                                (index) async =>  {
+                                    (index) async =>
+                                {
                                   setState(() {
                                     types
-                                        .forEach((gender) => gender.isSelected = false);
+                                        .forEach((gender) =>
+                                    gender.isSelected = false);
                                     types[index].isSelected = true;
                                   })
-                                },dropdownItems,selectedValue);
+                                }, dropdownItems, selectedValue);
                           },
                           child: const SizedBox(
                               width: 40,
@@ -117,19 +121,24 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: widget._controller.listAnnounces.length,
-                      itemBuilder: (context, int index) {
-                        return widget._controller.listAnnounces[index];
-                      },
-                    ),
-                  ),
+                GetX<HomePageController>(
+                    builder: (controller) {
+                      return Expanded(
+                        child: SingleChildScrollView(
+                          child: ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: controller.listAnnounces.length,
+                            itemBuilder: (context, int index) {
+                              return controller.listAnnounces[index];
+                            },
+                          ),
+                        ),
+                      );
+                    }
                 )
+
               ],
             ),
           ),

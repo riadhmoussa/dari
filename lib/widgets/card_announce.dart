@@ -42,46 +42,46 @@ class _CardAnnounceState extends State<CardAnnounce> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child:  Icon(Icons.delete ,size: 40,color: AppColors.redColor,)),
-                    SizedBox(),
-                    Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child:  Icon(Icons.edit,size: 40,color: AppColors.greenBgColor,)),
-                  ],
-                ),
+
               ],
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 5),
-              child: Align(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SizedBox(height: 10,),
-                    Text(
-                      "Studio Apartment",
-                      softWrap: false,
-                      style: TextStyle(
-                          color: AppColors.blackColor,
-                          fontSize: 12),
-                    ),
-                    SizedBox(height: 5,),
-                    Text(
-                      "TND 23,456",
-                      style: TextStyle(
-                        color: AppColors.blackColor,
-                        fontSize: 12,
+            Stack(
+              children:[
+              Container(
+                margin: const EdgeInsets.only(left: 5),
+                child: Align(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:  [
+                      SizedBox(height: 10,),
+                      const Text(
+                        "Studio Apartment",
+                        softWrap: false,
+                        style: TextStyle(
+                            color: AppColors.blackColor,
+                            fontSize: 12),
                       ),
-                    ),
-
-                  ],
+                      SizedBox(height: 5,),
+                      const Text(
+                        "TND 23,456",
+                        style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Icon(Icons.delete ,size: 30,color: AppColors.redColor,),
+                          SizedBox(),
+                          Icon(Icons.edit,size: 30,color: Colors.green,),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              ],
             )
 
            ],
